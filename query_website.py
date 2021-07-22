@@ -3,7 +3,7 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-PATH = "E:\\repos\\API\\msedgedriver.exe"
+PATH = ".\\msedgedriver.exe"
 
 def get_result(data):
     driver = webdriver.Edge(PATH)
@@ -20,8 +20,9 @@ def get_result(data):
     document_type_select = Select(document_type_options)
     document_type_select.select_by_value(data['document_type'])
 
-    document_number_field = driver.find_element_by_name("num_docide")
-    document_number_field.send_keys(data['document_number'])
+    if(data['document_type'] != '-'):
+        document_number_field = driver.find_element_by_name("num_docide")
+        document_number_field.send_keys(data['document_number'])
 
     voucher_serial_field = driver.find_element_by_name("num_serie")
     voucher_serial_field.send_keys(data['voucher_serial'])

@@ -4,7 +4,7 @@ from query_website import get_result
 app = Flask(__name__)
 
 @app.route('/', methods=["POST"])
-def hello_world():
+def sunatAPI():
     dataObject = request.get_json(force=True) 
 
     typeOfVoucher = {
