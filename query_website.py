@@ -3,10 +3,15 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-PATH = ".\\msedgedriver.exe"
+
+PATH = ".\\chromedriver.exe"
 
 def get_result(data):
-    driver = webdriver.Edge(PATH)
+    options = webdriver.ChromeOptions()
+    options.headless = True
+    options.add_argument("disable-gpu")
+    driver = webdriver.Chrome(PATH)
+    # driver.set_window_size(1120, 550)
     driver.get("https://ww1.sunat.gob.pe/ol-ti-itconsvalicpe/ConsValiCpe.htm")
 
     ruc_number_field = driver.find_element_by_name("num_ruc")
@@ -20,9 +25,9 @@ def get_result(data):
     document_type_select = Select(document_type_options)
     document_type_select.select_by_value(data['document_type'])
 
-    if(data['document_type'] != '-'):
-        document_number_field = driver.find_element_by_name("num_docide")
-        document_number_field.send_keys(data['document_number'])
+    # if(data['document_type'] != '-'):
+    document_number_field = driver.find_element_by_name("num_docide")
+    document_number_field.send_keys(data['document_number'])
 
     voucher_serial_field = driver.find_element_by_name("num_serie")
     voucher_serial_field.send_keys(data['voucher_serial'])
